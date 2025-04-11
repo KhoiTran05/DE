@@ -1,0 +1,128 @@
+
+CREATE TABLE IF NOT EXISTS Events (
+    id VARCHAR(255) PRIMARY KEY,
+    type VARCHAR(255),
+    public BOOLEAN,
+    created_at DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS Actors (
+    actor_id BIGINT,
+    event_id VARCHAR(255),
+    login VARCHAR(255) NOT NULL,
+    gravatar_id VARCHAR(255),
+    avatar_url VARCHAR(255),
+    url VARCHAR(255),
+    FOREIGN KEY (event_id) REFERENCES Events(id)
+);
+
+CREATE TABLE IF NOT EXISTS Repositories (
+    repo_id BIGINT,
+    event_id VARCHAR(255),
+    name VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (event_id) REFERENCES Events(id)
+);
+
+CREATE TABLE IF NOT EXISTS Payload_Forkee (
+    forkee_id BIGINT,
+    event_id VARCHAR(255),
+    name VARCHAR(255),
+    full_name VARCHAR(255),
+    private BOOLEAN,
+    html_url BOOLEAN,
+    description TEXT,
+    fork BOOLEAN,
+    url VARCHAR(255),
+    forks_url VARCHAR(255),
+    keys_url VARCHAR(255),
+    collaborators_url VARCHAR(255),
+    teams_url VARCHAR(255),
+    hooks_url VARCHAR(255),
+    issue_events_url VARCHAR(255),
+    events_url VARCHAR(255),
+    assignees_url VARCHAR(255),
+    branches_url VARCHAR(255),
+    tags_url VARCHAR(255),
+    blobs_url VARCHAR(255),
+    git_tags_url VARCHAR(255),
+    git_refs_url VARCHAR(255),
+    trees_url VARCHAR(255),
+    statuses_url VARCHAR(255),
+    languages_url VARCHAR(255),
+    stargazers_url VARCHAR(255),
+    contributors_url VARCHAR(255),
+    subscribers_url VARCHAR(255),
+    subscription_url VARCHAR(255),
+    commits_url VARCHAR(255),
+    git_commits_url VARCHAR(255),
+    comments_url VARCHAR(255),
+    issue_comment_url VARCHAR(255),
+    contents_url VARCHAR(255),
+    compare_url VARCHAR(255),
+    merges_url VARCHAR(255),
+    archive_url VARCHAR(255),
+    downloads_url VARCHAR(255),
+    issues_url VARCHAR(255),
+    pulls_url VARCHAR(255),
+    milestones_url VARCHAR(255),
+    notifications_url VARCHAR(255),
+    labels_url VARCHAR(255),
+    releases_url VARCHAR(255),
+    created_at DATETIME,
+    updated_at DATETIME,
+    pushed_at DATETIME,
+    git_url VARCHAR(255),
+    ssh_url VARCHAR(255),
+    clone_url VARCHAR(255),
+    svn_url VARCHAR(255),
+    homepage VARCHAR(255),
+    size INT,
+    stargazers_count INT,
+    watchers_count INT,
+    language VARCHAR(255),
+    has_issues BOOLEAN,
+    has_downloads BOOLEAN,
+    has_wiki BOOLEAN,
+    has_pages BOOLEAN,
+    forks_count INT,
+    mirror_url VARCHAR(255),
+    open_issues_count INT,
+    forks INT,
+    open_issues INT,
+    watchers INT,
+    default_branch VARCHAR(255),
+    public BOOLEAN,
+    FOREIGN KEY (event_id) REFERENCES Events(id)
+);
+
+CREATE TABLE IF NOT EXISTS Forkee_Owner (
+    owner_id BIGINT,
+    forkee_id BIGINT,
+    login VARCHAR(255),
+    avatar_url VARCHAR(255),
+    gravatar_id VARCHAR(255),
+    url VARCHAR(255),
+    html_url VARCHAR(255),
+    followers_url VARCHAR(255),
+    following_url VARCHAR(255),
+    gists_url VARCHAR(255),
+    starred_url VARCHAR(255),
+    subscriptions_url VARCHAR(255),
+    organizations_url VARCHAR(255),
+    repos_url VARCHAR(255),
+    events_url VARCHAR(255),
+    received_events_url VARCHAR(255),
+    type VARCHAR(255),
+    site_admin BOOLEAN
+);
+
+CREATE TABLE IF NOT EXISTS org (
+    org_id BIGINT,
+    event_id VARCHAR(255),
+    login VARCHAR(255),
+    gravatar_id VARCHAR(255),
+    url VARCHAR(255),
+    avatar_url VARCHAR(255),
+    FOREIGN KEY (event_id) REFERENCES Events(id)
+);
